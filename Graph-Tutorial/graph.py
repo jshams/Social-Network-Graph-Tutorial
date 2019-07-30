@@ -98,6 +98,23 @@ class Graph(object):
                     queue.enqueue(neighbor)
         return None
 
+    def clique(self):
+        from random import choice
+        choice(self.get_vertices())
+        # Start with an arbitrary vertex u and add it to the clique
+        clique_list = set()
+        for vertex in self.get_vertices():
+            # For v in remaining vertices not in the clique
+            in_clique = True
+            # If v is adjacent to every other vertex already in the clique.
+            for clique_vetex in clique_list:
+                if not self.get_vertex(clique_vetex).is_neighbors_with(vertex):
+                    in_clique = False
+            if in_clique:
+                clique_list.add(vertex)
+                # Add v to the clique
+        return clique_list
+
 
 if __name__ == "__main__":
 
