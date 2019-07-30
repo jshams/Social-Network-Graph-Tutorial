@@ -98,11 +98,12 @@ class Graph(object):
                     queue.enqueue(neighbor)
         return None
 
-    def clique(self):
-        from random import choice
-        choice(self.get_vertices())
-        # Start with an arbitrary vertex u and add it to the clique
-        clique_list = set()
+    def clique(self, start=None):
+        if start is None:
+            from random import choice
+            start = choice(self.get_vertices())
+            # Start with an arbitrary vertex and add it to the clique
+        clique_list = set([start])
         for vertex in self.get_vertices():
             # For v in remaining vertices not in the clique
             in_clique = True
@@ -114,6 +115,17 @@ class Graph(object):
                 clique_list.add(vertex)
                 # Add v to the clique
         return clique_list
+
+    def diameter(self):
+        vert_keys = self.get_vertices()
+        longest_shortest_path = 0
+        while len(vert_keys) > 0:
+            current_vert = vert_keys.pop()
+            for other_vertex in vert_keys:
+                dist = len(self.find_shortest_path(current_vert, other_vertex))
+                if dist > longest_shortest_path:
+                    longest_shortest_path = dist
+        return longest_shortest_path
 
 
 if __name__ == "__main__":
