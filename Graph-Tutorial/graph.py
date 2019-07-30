@@ -66,6 +66,38 @@ class Graph(object):
         # return [neighbor for neighbor in x.neighbors.values()]
         return list(x.neighbors.values())
 
+    def breadth_first_search(self, start: str):
+        '''traverses the graph in BFS order from a start'''
+        seen = {start}
+        queue = Queue([start])
+        print(start)
+        while not queue.is_empty():
+            vertex_key = queue.dequeue()
+            for neighbor in self.get_vertex(vertex_key).neighbors:
+                if neighbor not in seen:
+                    print(neighbor)
+                    seen.add(neighbor)
+                    queue.enqueue(neighbor)
+        return list(seen)
+
+    def find_path(self, start: str, end: str):
+        self.find_shortest_path(start, end)
+
+    def find_shortest_path(self, start: str, end: str):
+        '''finds the shortest path between two points and returns None if there are none'''
+        seen = {start: [start]}
+        queue = Queue([start])
+        while not queue.is_empty():
+            vertex_key = queue.dequeue()
+            for neighbor in self.get_vertex(vertex_key).neighbors:
+                if neighbor not in seen:
+                    seen[neighbor] = seen[vertex_key] + [neighbor]
+                    if neighbor == end:
+                        # print(seen[neighbor])
+                        return seen[neighbor]
+                    queue.enqueue(neighbor)
+        return None
+
 
 if __name__ == "__main__":
 
