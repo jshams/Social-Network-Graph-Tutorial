@@ -13,7 +13,7 @@ Jake,Shirley,Stella,Bailey,Margarette,Marti,Jack,Daniel,Sam,Adam
 (Bailey,Margarette)
 (Jack,Daniel)
 (Jack,Adam)
-(Sam, Jack)
+(Sam,Jack)
 (Sam,Adam)
 (Sam,Daniel)
 (Daniel,Adam)
